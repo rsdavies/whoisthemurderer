@@ -1,3 +1,4 @@
+#!/usr/bin/env python3
 import pandas as pd
 import os
 import pickle
@@ -7,6 +8,7 @@ import base64
 from googleapiclient.discovery import build
 from google_auth_oauthlib.flow import InstalledAppFlow
 from google.auth.transport.requests import Request
+import argparse
 
 # If modifying these scopes, delete the file token.pickle.
 SCOPES = ['https://www.googleapis.com/auth/gmail.compose']
@@ -89,4 +91,8 @@ def main(email_csv):
 
 
 if __name__ == '__main__':
-    main("participant_emails.csv")
+    parser = argparse.ArgumentParser(description="Randomly pick a murderer and email them")
+    parser.add_argument('emails', metavar="FILE", type=str, help="text file with email per row")
+
+    args = parser.parse_args()
+    main(args.emails)
